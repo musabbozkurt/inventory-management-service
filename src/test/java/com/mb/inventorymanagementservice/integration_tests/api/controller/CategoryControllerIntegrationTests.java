@@ -10,6 +10,7 @@ import com.mb.inventorymanagementservice.base.BaseUnitTest;
 import com.mb.inventorymanagementservice.config.TestRedisConfiguration;
 import com.mb.inventorymanagementservice.exception.BaseException;
 import com.mb.inventorymanagementservice.exception.InventoryManagementServiceErrorCode;
+import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.util.Collections;
-import java.util.Currency;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -154,9 +154,8 @@ public class CategoryControllerIntegrationTests extends BaseUnitTest {
         productRequest.setName("Art");
         productRequest.setProductCode("Art");
         productRequest.setDescription("Art Product Description");
-        productRequest.setCurrentPrice(BigDecimal.valueOf(6.0));
+        productRequest.setAmount(Money.of(BigDecimal.valueOf(6.0), "EUR"));
         productRequest.setQuantity(2000);
-        productRequest.setCurrency(Currency.getInstance("EUR").getCurrencyCode());
 
         ResponseEntity<ApiCategoryResponse> response = restTemplate.exchange("/categories/Book Category/products", HttpMethod.POST, new HttpEntity<>(productRequest), ApiCategoryResponse.class);
 
@@ -170,7 +169,7 @@ public class CategoryControllerIntegrationTests extends BaseUnitTest {
         ApiProductRequest productRequest = new ApiProductRequest();
         productRequest.setName("Perfumes");
         productRequest.setDescription("Perfumes Description");
-        productRequest.setCurrentPrice(BigDecimal.valueOf(100.0));
+        productRequest.setAmount(Money.of(BigDecimal.valueOf(100.0), "EUR"));
 
         ResponseEntity<BaseException> response = restTemplate.exchange("/categories/Beauty Category/products", HttpMethod.POST, new HttpEntity<>(productRequest), BaseException.class);
 

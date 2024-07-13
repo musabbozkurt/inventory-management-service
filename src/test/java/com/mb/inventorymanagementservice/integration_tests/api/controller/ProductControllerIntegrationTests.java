@@ -119,7 +119,7 @@ public class ProductControllerIntegrationTests extends BaseUnitTest {
         Assertions.assertNotNull(response.getBody());
         Assertions.assertEquals(apiProductRequest.getName(), response.getBody().getName());
         Assertions.assertEquals(apiProductRequest.getDescription(), response.getBody().getDescription());
-        Assertions.assertEquals(apiProductRequest.getCurrentPrice(), response.getBody().getCurrentPrice());
+        Assertions.assertEquals(apiProductRequest.getAmount(), response.getBody().getAmount());
     }
 
     @Test

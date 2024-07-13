@@ -55,12 +55,8 @@ public class ProductServiceImpl implements ProductService {
             existingProduct.setDescription(newProduct.getDescription());
             shouldDatabaseBeUpdated = true;
         }
-        if (ObjectUtils.notEqual(existingProduct.getCurrentPrice(), newProduct.getCurrentPrice())) {
-            existingProduct.setCurrentPrice(newProduct.getCurrentPrice());
-            shouldDatabaseBeUpdated = true;
-        }
-        if (!StringUtils.equalsIgnoreCase(existingProduct.getCurrency(), newProduct.getCurrency())) {
-            existingProduct.setCurrency(newProduct.getCurrency());
+        if (ObjectUtils.notEqual(existingProduct.getAmount(), newProduct.getAmount())) {
+            existingProduct.setAmount(newProduct.getAmount());
             shouldDatabaseBeUpdated = true;
         }
         if (ObjectUtils.notEqual(existingProduct.getQuantity(), newProduct.getQuantity())) {

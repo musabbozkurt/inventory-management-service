@@ -1,12 +1,13 @@
 package com.mb.inventorymanagementservice.api.response;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mb.inventorymanagementservice.config.money.MoneyDeserializer;
+import com.mb.inventorymanagementservice.config.money.MoneySerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.javamoney.moneta.Money;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Data
@@ -27,14 +28,16 @@ public class ApiProductResponse {
     @Schema(description = "Product name")
     private String name;
 
-    @Schema(description = "Product description")
+    @Schema(description = "Product code")
     private String productCode;
 
     @Schema(description = "Product description")
     private String description;
 
-    @Schema(description = "Product current price")
-    private BigDecimal currentPrice;
+    @Schema(description = "Product price")
+    @JsonSerialize(using = MoneySerializer.class)
+    @JsonDeserialize(using = MoneyDeserializer.class)
+    private Money amount;
 
     @Schema(description = "Product quantity")
     private int quantity;
