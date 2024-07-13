@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mb.inventorymanagementservice.config.money.MoneyDeserializer;
 import com.mb.inventorymanagementservice.config.money.MoneySerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.javamoney.moneta.Money;
 
 import java.time.OffsetDateTime;
@@ -37,7 +40,7 @@ public class ApiProductResponse {
     @Schema(description = "Product price")
     @JsonSerialize(using = MoneySerializer.class)
     @JsonDeserialize(using = MoneyDeserializer.class)
-    private Money amount;
+    private Money price;
 
     @Schema(description = "Product quantity")
     private int quantity;

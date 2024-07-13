@@ -1,7 +1,6 @@
 package com.mb.inventorymanagementservice.integration_tests.api.controller;
 
 import com.mb.inventorymanagementservice.api.request.ApiCategoryRequest;
-import com.mb.inventorymanagementservice.api.request.ApiProductRequest;
 import com.mb.inventorymanagementservice.api.request.ApiUserAuthRequest;
 import com.mb.inventorymanagementservice.api.response.ApiCategoryResponse;
 import com.mb.inventorymanagementservice.api.response.ApiProductResponse;
@@ -10,7 +9,6 @@ import com.mb.inventorymanagementservice.base.BaseUnitTest;
 import com.mb.inventorymanagementservice.config.TestRedisConfiguration;
 import com.mb.inventorymanagementservice.exception.BaseException;
 import com.mb.inventorymanagementservice.exception.InventoryManagementServiceErrorCode;
-import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +17,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -150,14 +147,7 @@ public class CategoryControllerIntegrationTests extends BaseUnitTest {
     @Test
     @Order(value = 9)
     void testAddProductToCategory() {
-        ApiProductRequest productRequest = new ApiProductRequest();
-        productRequest.setName("Art");
-        productRequest.setProductCode("Art");
-        productRequest.setDescription("Art Product Description");
-        productRequest.setAmount(Money.of(BigDecimal.valueOf(6.0), "EUR"));
-        productRequest.setQuantity(2000);
-
-        ResponseEntity<ApiCategoryResponse> response = restTemplate.exchange("/categories/Book Category/products", HttpMethod.POST, new HttpEntity<>(productRequest), ApiCategoryResponse.class);
+        ResponseEntity<ApiCategoryResponse> response = restTemplate.exchange("/categories/Book Category/Art", HttpMethod.PUT, null, ApiCategoryResponse.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -166,12 +156,7 @@ public class CategoryControllerIntegrationTests extends BaseUnitTest {
     @Test
     @Order(value = 10)
     void testAddProductToCategory_ShouldFail_WhenProductIsNotFound() {
-        ApiProductRequest productRequest = new ApiProductRequest();
-        productRequest.setName("Perfumes");
-        productRequest.setDescription("Perfumes Description");
-        productRequest.setAmount(Money.of(BigDecimal.valueOf(100.0), "EUR"));
-
-        ResponseEntity<BaseException> response = restTemplate.exchange("/categories/Beauty Category/products", HttpMethod.POST, new HttpEntity<>(productRequest), BaseException.class);
+        ResponseEntity<BaseException> response = restTemplate.exchange("/categories/Beauty Category/Perfumes", HttpMethod.PUT, null, BaseException.class);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());

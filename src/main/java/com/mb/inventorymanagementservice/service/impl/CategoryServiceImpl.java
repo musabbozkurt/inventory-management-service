@@ -1,7 +1,6 @@
 package com.mb.inventorymanagementservice.service.impl;
 
 import com.mb.inventorymanagementservice.data.entity.Category;
-import com.mb.inventorymanagementservice.data.entity.Product;
 import com.mb.inventorymanagementservice.data.repository.CategoryRepository;
 import com.mb.inventorymanagementservice.exception.BaseException;
 import com.mb.inventorymanagementservice.exception.InventoryManagementServiceErrorCode;
@@ -65,9 +64,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public Category addProductToCategory(String name, Product product) {
+    public Category addProductToCategory(String name, String productName) {
         Category category = this.findByName(name);
-        category.addProduct(productService.getProductByName(product.getName()));
+        category.addProduct(productService.getProductByName(productName));
         category.setLiveInMarket(isLiveInMarket(category));
         try {
             return categoryRepository.save(category);

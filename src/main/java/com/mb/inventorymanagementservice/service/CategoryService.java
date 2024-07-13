@@ -1,7 +1,6 @@
 package com.mb.inventorymanagementservice.service;
 
 import com.mb.inventorymanagementservice.data.entity.Category;
-import com.mb.inventorymanagementservice.data.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +16,7 @@ public interface CategoryService {
 
     void deleteCategoryById(Long categoryId);
 
-    Category addProductToCategory(String name, Product product);
+    Category addProductToCategory(String name, String productName);
 
     Category deleteProductFromCategory(String name, String productName);
 }

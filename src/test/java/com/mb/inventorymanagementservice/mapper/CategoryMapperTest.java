@@ -27,7 +27,7 @@ class CategoryMapperTest extends BaseUnitTest {
         assertEquals(category.isLiveInMarket(), result.isLiveInMarket());
         assertEquals(category.getProducts().getFirst().getName(), result.getProducts().getFirst().getName());
         assertEquals(category.getProducts().getFirst().getDescription(), result.getProducts().getFirst().getDescription());
-        assertEquals(category.getProducts().getFirst().getAmount(), result.getProducts().getFirst().getAmount());
+        assertEquals(category.getProducts().getFirst().getPrice(), result.getProducts().getFirst().getPrice());
     }
 
     @Test

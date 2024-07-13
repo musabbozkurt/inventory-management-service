@@ -60,7 +60,7 @@ public abstract class BaseUnitTest {
         product.setName("IPHONE 13");
         product.setProductCode("IPHONE_13");
         product.setDescription("IPHONE 13 Description");
-        product.setAmount(Money.of(BigDecimal.valueOf(22.12), "EUR"));
+        product.setPrice(Money.of(BigDecimal.valueOf(22.12), "EUR"));
         product.setQuantity(10);
         return product;
     }
@@ -70,11 +70,11 @@ public abstract class BaseUnitTest {
     }
 
     public static ApiProductRequest getApiProductRequest() {
-        return ApiProductRequest.builder().name("IPHONE 15").productCode("IPHONE_15").description("IPHONE 15 Description").amount(Money.of(BigDecimal.valueOf(2850), "EUR")).quantity(10).build();
+        return ApiProductRequest.builder().name("IPHONE 15").productCode("IPHONE_15").description("IPHONE 15 Description").price(Money.of(BigDecimal.valueOf(2850), "EUR")).quantity(10).build();
     }
 
     public static ApiProductRequest getApiProductRequest2() {
-        return ApiProductRequest.builder().name("IPHONE 13").productCode("IPHONE_13").description("IPHONE 13 Description").amount(Money.of(BigDecimal.valueOf(2500), "EUR")).quantity(10).build();
+        return ApiProductRequest.builder().name("IPHONE 13").productCode("IPHONE_13").description("IPHONE 13 Description").price(Money.of(BigDecimal.valueOf(2500), "EUR")).quantity(10).build();
     }
 
     public static ApiCategoryRequest getApiCategoryRequest() {

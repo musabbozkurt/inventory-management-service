@@ -1,7 +1,6 @@
 package com.mb.inventorymanagementservice.api.controller;
 
 import com.mb.inventorymanagementservice.api.request.ApiCategoryRequest;
-import com.mb.inventorymanagementservice.api.request.ApiProductRequest;
 import com.mb.inventorymanagementservice.api.response.ApiCategoryResponse;
 import com.mb.inventorymanagementservice.api.response.ApiProductResponse;
 import com.mb.inventorymanagementservice.mapper.CategoryMapper;
@@ -85,13 +84,13 @@ public class CategoryController {
         return ResponseEntity.ok(productMapper.map(categoryService.findByName(name).getProducts()));
     }
 
-    @PostMapping("/{name}/products")
+    @PutMapping("/{name}/{productName}")
     @PreAuthorize("hasRole('ADD_PRODUCT')")
     @Observed(name = "addProductToCategory")
     @Operation(description = "Add a product to a category.")
-    public ResponseEntity<ApiCategoryResponse> addProductToCategory(@PathVariable String name, @RequestBody ApiProductRequest product) {
-        log.info("Received a request to add product to category. addProductToCategory - name: {}, product: {}", name, product);
-        return ResponseEntity.ok(categoryMapper.map(categoryService.addProductToCategory(name, productMapper.map(product))));
+    public ResponseEntity<ApiCategoryResponse> addProductToCategory(@PathVariable String name, @PathVariable String productName) {
+        log.info("Received a request to add product to category. addProductToCategory - name: {}, productName: {}", name, productName);
+        return ResponseEntity.ok(categoryMapper.map(categoryService.addProductToCategory(name, productName)));
     }
 
     @DeleteMapping("/{name}/{productName}")
