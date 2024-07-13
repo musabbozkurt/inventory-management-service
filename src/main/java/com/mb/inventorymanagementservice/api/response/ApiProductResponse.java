@@ -37,7 +37,7 @@ public class ApiProductResponse {
     @Schema(description = "Product price")
     @JsonSerialize(using = MoneySerializer.class)
     @JsonDeserialize(using = MoneyDeserializer.class)
-    private Money amount;
+    private Money price;
 
     @Schema(description = "Product quantity")
     private int quantity;

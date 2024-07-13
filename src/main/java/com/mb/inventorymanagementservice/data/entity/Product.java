@@ -31,7 +31,7 @@ public class Product extends BaseEntity {
     @CompositeType(MonetaryAmountType.class)
     @AttributeOverride(name = "currency", column = @Column(name = "currency"))
     @AttributeOverride(name = "amount", column = @Column(name = "current_price"))
-    private Money amount;
+    private Money price;
 
     @Column(nullable = false)
     private int quantity;

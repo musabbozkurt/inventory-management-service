@@ -26,7 +26,7 @@ class ProductMapperTest extends BaseUnitTest {
         // assertion
         assertEquals(product.getName(), result.getName());
         assertEquals(product.getDescription(), result.getDescription());
-        assertEquals(product.getAmount(), result.getAmount());
+        assertEquals(product.getPrice(), result.getPrice());
     }
 
     @Test
@@ -40,7 +40,7 @@ class ProductMapperTest extends BaseUnitTest {
         // assertion
         assertEquals(apiProductRequest.getFirst().getName(), result.getFirst().getName());
         assertEquals(apiProductRequest.getFirst().getDescription(), result.getFirst().getDescription());
-        assertEquals(apiProductRequest.getFirst().getAmount(), result.getFirst().getAmount());
+        assertEquals(apiProductRequest.getFirst().getPrice(), result.getFirst().getPrice());
         assertEquals(apiProductRequest.getFirst().getId(), result.getFirst().getId());
     }
 
@@ -55,6 +55,6 @@ class ProductMapperTest extends BaseUnitTest {
         // assertion
         assertEquals(apiProductRequest.getName(), result.getName());
         assertEquals(apiProductRequest.getDescription(), result.getDescription());
-        assertEquals(apiProductRequest.getAmount(), result.getAmount());
+        assertEquals(apiProductRequest.getPrice(), result.getPrice());
     }
 }

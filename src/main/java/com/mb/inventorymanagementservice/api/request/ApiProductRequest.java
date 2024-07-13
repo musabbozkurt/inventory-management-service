@@ -27,11 +27,11 @@ public class ApiProductRequest {
     @JsonDeserialize(using = MoneyDeserializer.class)
     @Schema(description = "Product price", example = """
             {
-              "value": "10.32",
+              "amount": "10.32",
               "currency": "EUR"
             }
             """)
-    private Money amount;
+    private Money price;
 
     @Schema(description = "Product quantity", example = "100")
     private int quantity;
