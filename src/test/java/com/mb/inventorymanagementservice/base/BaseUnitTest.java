@@ -6,6 +6,7 @@ import com.mb.inventorymanagementservice.api.request.ApiUserRequest;
 import com.mb.inventorymanagementservice.data.entity.Category;
 import com.mb.inventorymanagementservice.data.entity.Product;
 import com.mb.inventorymanagementservice.data.entity.User;
+import org.javamoney.moneta.Money;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -59,7 +60,7 @@ public abstract class BaseUnitTest {
         product.setName("IPHONE 13");
         product.setProductCode("IPHONE_13");
         product.setDescription("IPHONE 13 Description");
-        product.setCurrentPrice(BigDecimal.valueOf(22.12));
+        product.setAmount(Money.of(BigDecimal.valueOf(22.12), "EUR"));
         product.setQuantity(10);
         return product;
     }
@@ -69,11 +70,11 @@ public abstract class BaseUnitTest {
     }
 
     public static ApiProductRequest getApiProductRequest() {
-        return ApiProductRequest.builder().name("IPHONE 15").productCode("IPHONE_15").description("IPHONE 15 Description").currentPrice(BigDecimal.valueOf(2850)).currency("EUR").quantity(10).build();
+        return ApiProductRequest.builder().name("IPHONE 15").productCode("IPHONE_15").description("IPHONE 15 Description").amount(Money.of(BigDecimal.valueOf(2850), "EUR")).quantity(10).build();
     }
 
     public static ApiProductRequest getApiProductRequest2() {
-        return ApiProductRequest.builder().name("IPHONE 13").productCode("IPHONE_13").description("IPHONE 13 Description").currentPrice(BigDecimal.valueOf(2500)).quantity(10).build();
+        return ApiProductRequest.builder().name("IPHONE 13").productCode("IPHONE_13").description("IPHONE 13 Description").amount(Money.of(BigDecimal.valueOf(2500), "EUR")).quantity(10).build();
     }
 
     public static ApiCategoryRequest getApiCategoryRequest() {

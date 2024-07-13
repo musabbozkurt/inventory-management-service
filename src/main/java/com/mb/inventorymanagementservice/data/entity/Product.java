@@ -1,11 +1,11 @@
 package com.mb.inventorymanagementservice.data.entity;
 
+import io.hypersistence.utils.hibernate.type.money.MonetaryAmountType;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
-
-import java.math.BigDecimal;
+import org.hibernate.annotations.*;
+import org.javamoney.moneta.Money;
 
 @Entity
 @Getter
@@ -28,10 +28,10 @@ public class Product extends BaseEntity {
     private String description;
 
     @Column(nullable = false)
-    private BigDecimal currentPrice;
-
-    @Column(nullable = false)
-    private String currency;
+    @CompositeType(MonetaryAmountType.class)
+    @AttributeOverride(name = "currency", column = @Column(name = "currency"))
+    @AttributeOverride(name = "amount", column = @Column(name = "current_price"))
+    private Money amount;
 
     @Column(nullable = false)
     private int quantity;
