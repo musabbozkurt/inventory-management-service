@@ -15,6 +15,8 @@ public enum InventoryManagementServiceErrorCode implements Serializable, ErrorCo
     BAD_CREDENTIALS(HttpStatus.FORBIDDEN),
     ACCESS_DENIED(HttpStatus.FORBIDDEN),
     TOKEN_EXPIRED(HttpStatus.FORBIDDEN),
+    INVALID_TOKEN(HttpStatus.FORBIDDEN),
+    UNSUPPORTED_TOKEN(HttpStatus.FORBIDDEN),
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND),
     ALREADY_EXISTS(HttpStatus.BAD_REQUEST),
     CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND),

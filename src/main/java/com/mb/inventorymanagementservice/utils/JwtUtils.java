@@ -8,6 +8,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,20 +50,19 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken) {
         try {
-            getUserNameFromJwtToken(authToken);
-            return true;
+            return StringUtils.isNotBlank(getUserNameFromJwtToken(authToken));
         } catch (MalformedJwtException e) {
-            log.error("Invalid JWT token: {}", e.getMessage());
-            throw new RuntimeException("Invalid JWT token");
+            log.error("Invalid JWT token. validateJwtToken - Exception: {}", e.getMessage());
+            throw new BaseException(InventoryManagementServiceErrorCode.INVALID_TOKEN);
         } catch (ExpiredJwtException e) {
-            log.error("JWT token is expired: {}", e.getMessage());
+            log.error("JWT token is expired. validateJwtToken - Exception: {}", e.getMessage());
             throw new BaseException(InventoryManagementServiceErrorCode.TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
-            log.error("JWT token is unsupported: {}", e.getMessage());
-            throw new RuntimeException("JWT token is unsupported");
+            log.error("JWT token is unsupported. validateJwtToken - Exception: {}", e.getMessage());
+            throw new BaseException(InventoryManagementServiceErrorCode.UNSUPPORTED_TOKEN);
         } catch (IllegalArgumentException e) {
-            log.error("JWT claims string is empty: {}", e.getMessage());
-            throw new RuntimeException("JWT claims string is empty");
+            log.error("JWT claims string is empty. validateJwtToken - Exception: {}", e.getMessage());
+            throw new BaseException(InventoryManagementServiceErrorCode.INVALID_TOKEN);
         }
     }
 

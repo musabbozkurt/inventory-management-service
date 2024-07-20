@@ -2,6 +2,7 @@ package com.mb.inventorymanagementservice.service.impl;
 
 import com.mb.inventorymanagementservice.data.entity.User;
 import com.mb.inventorymanagementservice.data.repository.UserRepository;
+import com.mb.inventorymanagementservice.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsernameIgnoreCase(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+                .orElseThrow(() -> new UserNotFoundException("User Not Found with username: " + username));
 
         return UserDetailsImpl.build(user);
     }

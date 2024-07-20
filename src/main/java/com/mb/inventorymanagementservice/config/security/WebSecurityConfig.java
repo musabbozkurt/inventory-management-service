@@ -1,5 +1,6 @@
 package com.mb.inventorymanagementservice.config.security;
 
+import com.mb.inventorymanagementservice.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import javax.sql.DataSource;
 
@@ -33,11 +35,15 @@ public class WebSecurityConfig {
 
     private static final String[] ALLOWED_ENDPOINT_PATTERNS = {"/h2-console/**", "/swagger-resources", "/swagger-ui.html",
             "/swagger-ui/index.html", "/swagger-ui/**", "/api-docs/**", "/actuator/**", "/auth/**"};
+
     private final AuthEntryPointJwt unauthorizedHandler;
+    private final JwtUtils jwtUtils;
+    private final UserDetailsService userDetailsService;
+    private final HandlerExceptionResolver handlerExceptionResolver;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+        return new AuthTokenFilter(jwtUtils, userDetailsService, handlerExceptionResolver);
     }
 
     @Bean
