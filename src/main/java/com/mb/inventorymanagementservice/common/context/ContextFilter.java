@@ -2,8 +2,8 @@ package com.mb.inventorymanagementservice.common.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mb.inventorymanagementservice.exception.BaseException;
-import com.mb.inventorymanagementservice.exception.ErrorResponse;
 import com.mb.inventorymanagementservice.exception.InvalidParameterException;
+import com.mb.inventorymanagementservice.exception.LocalizedException;
 import com.mb.inventorymanagementservice.utils.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -57,7 +57,7 @@ public class ContextFilter extends OncePerRequestFilter {
         } catch (BaseException e) {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setStatus(e.getErrorCode().getHttpStatus().value());
-            response.getWriter().write(objectMapper.writeValueAsString(new ErrorResponse(e.getErrorCode().getCode(), e.getMessage())));
+            response.getWriter().write(objectMapper.writeValueAsString(new LocalizedException(e.getErrorCode().getCode())));
             response.getWriter().flush();
             response.getWriter().close();
         } finally {
@@ -87,7 +87,7 @@ public class ContextFilter extends OncePerRequestFilter {
             try {
                 return Locale.of(value);
             } catch (Exception ex) {
-                throw new InvalidParameterException("Must be valid language");
+                throw new InvalidParameterException();
             }
         }
         return Locale.of("EN");
