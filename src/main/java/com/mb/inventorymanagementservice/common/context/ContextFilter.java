@@ -1,4 +1,4 @@
-package com.mb.inventorymanagementservice.config.common.context;
+package com.mb.inventorymanagementservice.common.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mb.inventorymanagementservice.exception.BaseException;
