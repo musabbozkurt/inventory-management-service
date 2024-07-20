@@ -16,7 +16,7 @@ public class RestResponseExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ErrorResponse> handleBaseException(BaseException ex) {
         log.error("BaseException occurred: {}", ex.getErrorCode(), ex);
-        return new ResponseEntity<>(new ErrorResponse(ex.getErrorCode().getCode(), ex.getMessage()), ex.getErrorCode().getHttpStatus());
+        return new ResponseEntity<>(new LocalizedException(ex.getErrorCode().getCode(), ex.getParams()), ex.getErrorCode().getHttpStatus());
     }
 
     @ResponseBody
@@ -24,8 +24,8 @@ public class RestResponseExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         log.error("Exception occurred: {}", ExceptionUtils.getStackTrace(ex));
         if (ex instanceof BadCredentialsException) {
-            return new ResponseEntity<>(new ErrorResponse(InventoryManagementServiceErrorCode.BAD_CREDENTIALS.getCode(), ex.getMessage()), InventoryManagementServiceErrorCode.BAD_CREDENTIALS.getHttpStatus());
+            return new ResponseEntity<>(new LocalizedException(InventoryManagementServiceErrorCode.BAD_CREDENTIALS.getCode()), InventoryManagementServiceErrorCode.BAD_CREDENTIALS.getHttpStatus());
         }
-        return new ResponseEntity<>(new ErrorResponse(InventoryManagementServiceErrorCode.UNEXPECTED_ERROR.getCode(), ex.getMessage()), InventoryManagementServiceErrorCode.UNEXPECTED_ERROR.getHttpStatus());
+        return new ResponseEntity<>(new LocalizedException(InventoryManagementServiceErrorCode.UNEXPECTED_ERROR.getCode()), InventoryManagementServiceErrorCode.UNEXPECTED_ERROR.getHttpStatus());
     }
 }
