@@ -1,5 +1,6 @@
 package com.mb.inventorymanagementservice.config.security;
 
+import com.mb.inventorymanagementservice.utils.Constants;
 import com.mb.inventorymanagementservice.utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -56,5 +57,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             return headerAuth.substring(7);
         }
         return null;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return Constants.isUriExcluded(request.getRequestURI());
     }
 }

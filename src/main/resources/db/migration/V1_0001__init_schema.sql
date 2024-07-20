@@ -171,6 +171,9 @@ where not exists (select 1
                   where product_code = 'Art');
 
 insert into inventory_management_service.roles (id, name, created_date_time, default_role, deleted)
+values ((select nextval('inventory_management_service.default_sequence'::regclass)), 'ADMIN', now(), false, false);
+
+insert into inventory_management_service.roles (id, name, created_date_time, default_role, deleted)
 values ((select nextval('inventory_management_service.default_sequence'::regclass)), 'CREATE_PRODUCT', now(), true,
         false);
 
@@ -207,6 +210,10 @@ values ((select nextval('inventory_management_service.default_sequence'::regclas
 insert into inventory_management_service.roles (id, name, created_date_time, default_role, deleted)
 values ((select nextval('inventory_management_service.default_sequence'::regclass)), 'DELETE_CATEGORY', now(), true,
         false);
+
+insert into inventory_management_service.authorities (user_id, role_id, username, authority)
+values ((select id from inventory_management_service.users where username = 'admin_user'),
+        (select id from inventory_management_service.roles where name = 'ADMIN'), 'admin_user', 'ADMIN');
 
 insert into inventory_management_service.authorities (user_id, role_id, username, authority)
 values ((select id from inventory_management_service.users where username = 'admin_user'),
