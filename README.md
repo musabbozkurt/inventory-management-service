@@ -30,6 +30,10 @@
 
 ### `docker-compose` contains the followings
 
+* PostgreSQL DB connection details
+    * `POSTGRES_USER: postgres`
+    * `POSTGRES_PASSWORD: postgres`
+    * `Port: 5432`
 * Zipkin: http://localhost:9411/
 * Prometheus: http://localhost:9090/graph
 * Grafana: http://localhost:3000/
@@ -39,9 +43,6 @@
         * Select Prometheus
         * Prometheus Url: http://prometheus:9090/
         * Save & test
-* PostgreSQL DB connection details
-    * `POSTGRES_USER: postgres`
-    * `POSTGRES_PASSWORD: postgres`
-    * `Port: 5432`
+* Kafka-UI: http://localhost:9091/
 
 -----
