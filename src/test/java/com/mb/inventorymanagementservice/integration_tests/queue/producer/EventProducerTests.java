@@ -24,7 +24,6 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@EnableAutoConfiguration
 @ActiveProfiles("test-containers")
 public class EventProducerTests {
 
@@ -44,7 +43,7 @@ public class EventProducerTests {
     @Test
     public void testPublishEvent_ShouldSucceed() throws IOException {
         try (ConfigurableApplicationContext context = new SpringApplicationBuilder(TestChannelBinderConfiguration
-                .getCompleteConfiguration(EventProducerTests.class))
+                .getCompleteConfiguration(EmptyConfiguration.class))
                 .web(WebApplicationType.NONE)
                 .run("--spring.jmx.enabled=false")) {
 
@@ -70,5 +69,9 @@ public class EventProducerTests {
             assertThat(new String(result.getPayload())).isEqualTo(actualEventAsString);
             assertThat(actualEvent).isEqualTo(expectedInternalEvent);
         }
+    }
+
+    @EnableAutoConfiguration
+    public static class EmptyConfiguration {
     }
 }
