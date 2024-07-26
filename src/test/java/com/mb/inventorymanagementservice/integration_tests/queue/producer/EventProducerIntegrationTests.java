@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test-containers")
-public class EventProducerTests {
+public class EventProducerIntegrationTests {
 
     @Autowired
     private StreamBridge streamBridge;
