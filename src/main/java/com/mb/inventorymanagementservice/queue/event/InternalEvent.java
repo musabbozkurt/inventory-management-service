@@ -14,7 +14,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class InternalEvent extends BaseEventDto implements Event {
 
-    private UUID accountHolderId;
+    private UUID randomId;
 
     @Override
     @JsonIgnore

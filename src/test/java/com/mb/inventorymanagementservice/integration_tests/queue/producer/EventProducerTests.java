@@ -5,6 +5,7 @@ import com.mb.inventorymanagementservice.queue.QueueChannels;
 import com.mb.inventorymanagementservice.queue.event.InternalEvent;
 import com.mb.inventorymanagementservice.queue.producer.EventProducer;
 import com.mb.inventorymanagementservice.queue.producer.impl.EventProducerImpl;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
@@ -34,13 +35,14 @@ public class EventProducerTests {
     void testPublishEvent() {
         EventProducer eventProducer = new EventProducerImpl(streamBridge);
         InternalEvent actualInternalEvent = InternalEvent.builder()
-                .accountHolderId(UUID.randomUUID())
+                .randomId(UUID.randomUUID())
                 .build();
 
         eventProducer.publishEvent(QueueChannels.INTERNAL_EVENT_PRODUCER, actualInternalEvent);
     }
 
     @Test
+    @Disabled("Kafka must be running on Docker if this method needs to be enabled.")
     public void testPublishEvent_ShouldSucceed() throws IOException {
         try (ConfigurableApplicationContext context = new SpringApplicationBuilder(TestChannelBinderConfiguration
                 .getCompleteConfiguration(EmptyConfiguration.class))
@@ -50,7 +52,7 @@ public class EventProducerTests {
             // Arrange
             String bindingName = "test-destination";
             InternalEvent expectedInternalEvent = InternalEvent.builder()
-                    .accountHolderId(UUID.randomUUID())
+                    .randomId(UUID.randomUUID())
                     .build();
             StreamBridge streamBridge = context.getBean(StreamBridge.class);
             EventProducerImpl producer = new EventProducerImpl(streamBridge);
