@@ -42,6 +42,7 @@
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <moneta.version>1.4</moneta.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
         <!--suppress UnresolvedMavenProperty -->
         <registry>${env.CI_REGISTRY}/${env.CI_REGION}/${project.artifactId}</registry>
     </properties>
@@ -147,6 +148,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-test-binder</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
@@ -219,7 +226,24 @@
             <type>pom</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
