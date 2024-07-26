@@ -1,8 +1,8 @@
 package com.mb.inventorymanagementservice.queue.consumer.internal;
 
+import com.mb.inventorymanagementservice.queue.consumer.ConsumerStrategy;
 import com.mb.inventorymanagementservice.queue.event.Event;
 import com.mb.inventorymanagementservice.queue.event.InventoryManagementServiceEventType;
-import com.mb.inventorymanagementservice.queue.consumer.ConsumerStrategy;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

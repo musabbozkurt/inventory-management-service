@@ -16,6 +16,7 @@ import org.springframework.cloud.stream.binder.test.TestChannelBinderConfigurati
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.messaging.Message;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @EnableAutoConfiguration
+@ActiveProfiles("test-containers")
 public class EventProducerTests {
 
     @Autowired
