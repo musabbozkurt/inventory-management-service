@@ -1,10 +1,13 @@
 package com.mb.inventorymanagementservice.integration_tests.queue.producer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mb.inventorymanagementservice.base.BaseUnitTest;
 import com.mb.inventorymanagementservice.queue.QueueChannels;
 import com.mb.inventorymanagementservice.queue.event.InternalEvent;
+import com.mb.inventorymanagementservice.queue.event.UserCreatedEvent;
 import com.mb.inventorymanagementservice.queue.producer.EventProducer;
 import com.mb.inventorymanagementservice.queue.producer.impl.EventProducerImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +29,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test-containers")
-public class EventProducerIntegrationTests {
+public class EventProducerIntegrationTests extends BaseUnitTest {
 
     @Autowired
     private StreamBridge streamBridge;
 
+    private EventProducer eventProducer;
+
+    @BeforeEach
+    void setUp() {
+        eventProducer = new EventProducerImpl(streamBridge);
+    }
+
     @Test
     void testPublishEvent() {
-        EventProducer eventProducer = new EventProducerImpl(streamBridge);
         InternalEvent actualInternalEvent = InternalEvent.builder()
                 .randomId(UUID.randomUUID())
                 .build();
@@ -71,6 +80,15 @@ public class EventProducerIntegrationTests {
             assertThat(new String(result.getPayload())).isEqualTo(actualEventAsString);
             assertThat(actualEvent).isEqualTo(expectedInternalEvent);
         }
+    }
+
+    @Test
+    void testPublishEvent_ShouldPublishUserCreatedEvent() {
+        UserCreatedEvent actualUserCreatedEvent = UserCreatedEvent.builder()
+                .user(getUser())
+                .build();
+
+        eventProducer.publishEvent(QueueChannels.USER_CREATED_EVENT_PRODUCER, actualUserCreatedEvent);
     }
 
     @EnableAutoConfiguration

@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class InternalEventConsumerStrategyImpl implements ConsumerStrategy {
+public class UserCreatedEventConsumerStrategyImpl implements ConsumerStrategy {
 
     @Override
     public void execute(Event event) {
-        log.info("Received an internal event. execute - event: {}", event);
+        log.info("Received a user created event. execute - event: {}", event);
     }
 
     @Override
     public boolean canExecute(Event event) {
-        return InventoryManagementServiceEventType.INTERNAL_EVENT.equals(event.getEventType());
+        return InventoryManagementServiceEventType.USER_CREATED_EVENT.equals(event.getEventType());
     }
 }

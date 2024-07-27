@@ -1,6 +1,7 @@
 package com.mb.inventorymanagementservice.queue.consumer;
 
 import com.mb.inventorymanagementservice.queue.event.InternalEvent;
+import com.mb.inventorymanagementservice.queue.event.UserCreatedEvent;
 import com.mb.inventorymanagementservice.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,11 @@ public class ConsumerConfig {
 
     @Bean
     public Consumer<Message<InternalEvent>> internalEventConsumer() {
+        return message -> consumerStrategyExecutor.dispatchEvent(message.getPayload(), message.getHeaders());
+    }
+
+    @Bean
+    public Consumer<Message<UserCreatedEvent>> userCreatedEvent() {
         return message -> consumerStrategyExecutor.dispatchEvent(message.getPayload(), message.getHeaders());
     }
 }

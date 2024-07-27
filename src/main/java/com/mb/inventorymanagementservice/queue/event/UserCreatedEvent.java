@@ -1,9 +1,8 @@
 package com.mb.inventorymanagementservice.queue.event;
 
+import com.mb.inventorymanagementservice.data.entity.User;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import java.util.UUID;
 
 @Data
 @SuperBuilder
@@ -11,12 +10,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class InternalEvent extends BaseEventDto implements Event {
+public class UserCreatedEvent extends BaseEventDto implements Event {
 
-    private UUID randomId;
+    private User user;
 
     @Override
     public EventType getEventType() {
-        return InventoryManagementServiceEventType.INTERNAL_EVENT;
+        return InventoryManagementServiceEventType.USER_CREATED_EVENT;
     }
 }
