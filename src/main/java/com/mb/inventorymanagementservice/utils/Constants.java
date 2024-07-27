@@ -13,6 +13,7 @@ public final class Constants {
 
     public static final String DEFAULT_ID_GENERATOR_NAME = "default_sequence_generator";
     public static final List<?> EMPTY_LIST = List.of();
+    public static final String EVENT_TYPE_HEADER_KEY = "eventType";
     private static final List<String> EXCLUDED_URIS = List.of("/actuator/prometheus");
 
     public static boolean isUriExcluded(String uri) {
