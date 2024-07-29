@@ -81,6 +81,23 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9093
       - KAFKA_CLUSTERS_0_ZOOKEEPER=localhost:2181
 
+  new-relic-infra-agent:
+    container_name: new-relic-infra-agent
+    image: newrelic/infrastructure:latest
+    cap_add:
+      - SYS_PTRACE
+    network_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: unless-stopped
+    environment:
+      NRIA_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
+    deploy:
+      replicas: ${NEW_RELIC_INFRA_AGENT_REPLICAS}
+
 volumes:
   zookeeper_data:
     driver: local

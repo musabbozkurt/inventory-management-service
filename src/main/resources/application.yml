@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: inventory-management-service
+
+  config:
+    import: optional:file:.env[.properties]
+
   datasource:
     hikari:
       connection-timeout: 10000
@@ -105,6 +109,12 @@ management:
   endpoint:
     health:
       show-details: always
+  newrelic:
+    metrics:
+      export:
+        api-key: ${NEW_RELIC_LICENSE_KEY}
+        endpoint: ${NEW_RELIC_ENDPOINT}
+        enabled: ${NEW_RELIC_ENABLED}
 
 springdoc:
   api-docs:

@@ -4,6 +4,12 @@
 * `Docker` should be installed
 * `Maven` should be installed
 * `pgAdmin`/`DBeaver` can be installed (Optional)
+* `New Relic` is disabled by default. Properties can be set (Optional)
+    * If there is a `New Relic` account, log in to [New Relic](https://login.newrelic.com/login)
+        1. Generate `api-key` and replace the `NEW_RELIC_LICENSE_KEY` value with yours in the [.env](.env) file
+        2. Replace the `NEW_RELIC_ENDPOINT` value with yours in the [.env](.env) file
+        3. In the [.env](.env) file, if `api-key` and `endpoint` are present with the correct
+           values, `NEW_RELIC_ENABLED` can be `true` and `NEW_RELIC_INFRA_AGENT_REPLICAS` can be greater than zero(0)
 
 -----
 
@@ -44,5 +50,12 @@
         * Prometheus Url: http://prometheus:9090/
         * Save & test
 * Kafka-UI: http://localhost:9091/
+
+-----
+
+### References
+
+* https://github.com/newrelic/micrometer-registry-newrelic?tab=readme-ov-file#archival-notice
+* https://docs.micrometer.io/micrometer/reference/implementations/new-relic.html
 
 -----
