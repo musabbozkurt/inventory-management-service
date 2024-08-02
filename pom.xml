@@ -43,6 +43,8 @@
         <moneta.version>1.4</moneta.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
         <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
+        <newrelic-java.version>8.13.0</newrelic-java.version>
+        <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
         <!--suppress UnresolvedMavenProperty -->
         <registry>${env.CI_REGISTRY}/${env.CI_REGION}/${project.artifactId}</registry>
     </properties>
@@ -215,6 +217,14 @@
         </dependency>
 
         <dependency>
+            <groupId>com.newrelic.agent.java</groupId>
+            <artifactId>newrelic-java</artifactId>
+            <version>${newrelic-java.version}</version>
+            <scope>provided</scope>
+            <type>zip</type>
+        </dependency>
+
+        <dependency>
             <groupId>io.zipkin.reporter2</groupId>
             <artifactId>zipkin-reporter-brave</artifactId>
         </dependency>
@@ -368,6 +378,40 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Unzip New Relic Java agent into opt/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>unpack-newrelic</id>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>com.newrelic.agent.java</includeGroupIds>
+                            <includeArtifactIds>newrelic-java</includeArtifactIds>
+                            <!-- you can optionally exclude files -->
+                            <excludes>**/newrelic.yml</excludes>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <outputDirectory>${project.basedir}/opt</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.mb.inventorymanagementservice.InventoryManagementServiceApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
             </plugin>
         </plugins>
     </build>

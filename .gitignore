@@ -30,3 +30,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Ignore everything under /opt/newrelic/ ###
+opt/newrelic/*
+
+### Do not ignore the following files and directories ###
+!opt/newrelic/newrelic.yml
+!opt/newrelic/scripts/
