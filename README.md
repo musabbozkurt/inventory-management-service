@@ -17,6 +17,7 @@
 
 1. Run `mvn clean install` or `mvn clean package`
 2. Run `mvn spring-boot:run` or `./mvnw spring-boot:run`
+    - Run [./scripts/run.sh](scripts%2Frun.sh) to start the application with `New Relic Java agent` (OPTIONAL)
 
 -----
 
