@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SPRING_LOCAL_PORT:8080}
 
 spring:
   application:
@@ -16,7 +16,7 @@ spring:
       idle-timeout: 10000
     type: com.zaxxer.hikari.HikariDataSource
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_URL:localhost}/${POSTGRES_DB:postgres}?currentSchema=inventory_management_service
+    url: jdbc:postgresql://${DB_HOST:localhost}/${POSTGRES_DB:postgres}?currentSchema=inventory_management_service
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:postgres}
 
@@ -35,7 +35,7 @@ spring:
 
   data:
     redis:
-      host: ${REDIS_URL:localhost}
+      host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
       password:
       jedis:
@@ -74,6 +74,9 @@ spring:
           destination: user-created-event-destination
         userCreatedEvent-out-0:
           destination: user-created-event-destination
+      kafka:
+        binder:
+          brokers: ${KAFKA_BROKERS:localhost:9092}
 
   kafka:
     consumer:
@@ -115,6 +118,9 @@ management:
         api-key: ${NEW_RELIC_LICENSE_KEY}
         endpoint: ${NEW_RELIC_ENDPOINT}
         enabled: ${NEW_RELIC_ENABLED}
+  zipkin:
+    tracing:
+      endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans
 
 springdoc:
   api-docs:
