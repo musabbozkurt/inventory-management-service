@@ -25,6 +25,8 @@ services:
       - KAFKA_BROKERS=kafka:9093 # Kafka container name and port
     ports:
       - ${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}
+    profiles:
+      - ${INVENTORY_MANAGEMENT_SERVICE_START_PROFILE}
 
   postgres:
     image: debezium/example-postgres:latest
