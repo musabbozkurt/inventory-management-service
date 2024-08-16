@@ -35,5 +35,6 @@ build/
 opt/newrelic/*
 
 ### Do not ignore the following files and directories ###
+!opt/newrelic/newrelic.jar
 !opt/newrelic/newrelic.yml
 !opt/newrelic/scripts/
