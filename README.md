@@ -8,8 +8,8 @@
     * If there is a `New Relic` account, log in to [New Relic](https://login.newrelic.com/login)
         1. Generate `api-key` and replace the `NEW_RELIC_LICENSE_KEY` value with yours in the [.env](.env) file
         2. Replace the `NEW_RELIC_ENDPOINT` value with yours in the [.env](.env) file
-        3. In the [.env](.env) file, if `api-key` and `endpoint` are present with the correct
-           values, `NEW_RELIC_ENABLED` can be `true` and `NEW_RELIC_INFRA_AGENT_REPLICAS` can be greater than zero(0)
+        3. In the [.env](.env) file, if `api-key` and `endpoint` are present with the correct values,
+           `NEW_RELIC_AGENT_ENABLED` can be `true` and `NEW_RELIC_INFRA_AGENT_REPLICAS` can be greater than zero(0)
 
 -----
 

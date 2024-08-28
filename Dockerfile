@@ -9,9 +9,7 @@ ARG PROJECT_DIR=/home/projects/${PROJECT_NAME}
 COPY .. ${PROJECT_DIR}
 
 # Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN mvn -f ${PROJECT_DIR}/pom.xml dependency:go-offline
-
-RUN mvn -f ${PROJECT_DIR}/pom.xml clean install -DskipTests
+RUN --mount=type=cache,target=/root/.m2 mvn -f $PROJECT_DIR/pom.xml clean package -DskipTests
 
 ### Package stage ###
 
