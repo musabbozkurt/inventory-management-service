@@ -117,7 +117,7 @@ management:
       export:
         api-key: ${NEW_RELIC_LICENSE_KEY}
         endpoint: ${NEW_RELIC_ENDPOINT}
-        enabled: ${NEW_RELIC_ENABLED}
+        enabled: ${NEW_RELIC_AGENT_ENABLED}
   zipkin:
     tracing:
       endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans

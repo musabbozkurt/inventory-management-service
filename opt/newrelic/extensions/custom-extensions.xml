@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an example of a custom instrumentation extension XML file. -->
+
+<extension xmlns="https://newrelic.com/docs/java/xsd/v1.0"
+           name="custom-extensions">
+    <instrumentation>
+
+        <!-- This point cut disables instrumentation of the method handle(HttpServletRequest request, @RequestBody(required = false) Map<String, String> body) for
+            all implementations of the class org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler. -->
+        <pointcut ignoreTransaction="true">
+            <className>
+                org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler
+            </className>
+            <!-- Disable instrumentation of the method Object handle(HttpServletRequest request, @RequestBody(required = false) Map<String, String> body) -->
+            <method>
+                <name>handle</name>
+                <parameters>
+                    <type>javax.servlet.http.HttpServletRequest</type>
+                    <type>java.util.Map</type>
+                </parameters>
+            </method>
+        </pointcut>
+    </instrumentation>
+</extension>
